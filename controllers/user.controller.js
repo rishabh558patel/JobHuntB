@@ -97,11 +97,17 @@ export const login = async (req, res) => {
 
     return res
       .status(200)
+      // .cookie("token", token, {
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 1 day
+      //   httpOnly: true, // Prevent JS access
+      //   secure: true, // Required on HTTPS (Vercel/Render are HTTPS)
+      //   sameSite: "None", // Allow cross-site cookie
+      // })
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-        httpOnly: true, // Prevent JS access
-        secure: true, // Required on HTTPS (Vercel/Render are HTTPS)
-        sameSite: "None", // Allow cross-site cookie
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
         message: `Welcome back ${user.fullname}`,
@@ -115,10 +121,18 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      message: "Logged out successfully",
-      success: true,
-    });
+    return res
+      .status(200)
+      .cookie("token", "", {
+        maxAge: 0,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      })
+      .json({
+        message: "Logged out successfully",
+        success: true,
+      });
   } catch (error) {
     console.log(error);
   }
