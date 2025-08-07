@@ -1,0 +1,61 @@
+# ====================
+# 📦 Node.js (both frontend and backend)
+# ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ====================
+# 🛠️ Build artifacts
+# ====================
+dist/
+build/
+temp/
+.cache/
+.vite/
+
+# ====================
+# ⚙️ Environment variables
+# ====================
+.env
+.env.*.local
+
+# ====================
+# 📁 Logs
+# ====================
+logs/
+*.log
+
+# ====================
+# 🧪 Test coverage
+# ====================
+coverage/
+
+# ====================
+# 🧠 IDE and Editor files
+# ====================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ====================
+# 💻 System files
+# ====================
+.DS_Store
+Thumbs.db
+
+# ====================
+# ⏳ PM2 (process manager) logs
+# ====================
+pids/
+*.pid
+*.pid.lock
+
+# ====================
+# 🔄 OS-specific swap files
+# ====================
+*.swp
