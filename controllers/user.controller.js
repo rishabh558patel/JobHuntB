@@ -98,9 +98,10 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpsOnly: true,
-        sameSite: "strict",
+        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+        httpOnly: true, // Prevent JS access
+        secure: true, // Required on HTTPS (Vercel/Render are HTTPS)
+        sameSite: "None", // Allow cross-site cookie
       })
       .json({
         message: `Welcome back ${user.fullname}`,
