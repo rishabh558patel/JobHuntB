@@ -15,10 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(cors({
-  origin: 'https://jobhuntf.vercel.app',
-  credentials: true, // only if you're using cookies
-}));
+const corsOptions = {
+  origin: ['https://your-frontend-name.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
